@@ -8,8 +8,9 @@
 	{{- with .Site.Params.themeColor }}
 	<meta name="theme-color" content="{{.}}">
 	<meta name="msapplication-TileColor" content="{{.}}">
-    <meta name="referrer" content="no-referrer">
+	<meta name="referrer" content="no-referrer">
 	{{- end }}
+	<meta name="description" content="{{ if .Params.description }}{{ .Params.description }}{{ else if .Site.Params.Description }}{{ .Site.Params.Description }}{{ end }}"/>
 	{{- partial "structured-data.html" . }}
 	{{- partial "favicons.html" }}
 	<title>{{.Title}}</title>
@@ -41,8 +42,7 @@
 		{{ $script := $main | minify | fingerprint -}}
 		<script src="{{ $script.Permalink }}" {{ printf "integrity=%q" $script.Data.Integrity | safeHTMLAttr }} crossorigin="anonymous"></script>
 	{{ end }}
-
-	{{- partial "analytics.html" . }}
+.
 	{{- if templates.Exists "partials/extra-foot.html" -}}
 	{{ partial "extra-foot.html" . }}
 	{{- end }}
